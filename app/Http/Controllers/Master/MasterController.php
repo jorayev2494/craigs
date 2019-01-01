@@ -10,8 +10,13 @@ use View;
 class MasterController extends Controller
 {
 
-    protected $user_r;
+    // Данные сайта
+    protected $user_r;                          // Репозитории пользователей
 
+
+    // Данные Сайдбар Администратора
+    protected $admin_sidebar;
+    protected $admin_menu_select;
 
     #region Данные к виду
     protected $title = null;

@@ -16,7 +16,8 @@ use App\Repository\Repository;
 Route::get('/{uuid}', ["uses" => "IndexController@index", "as" => "index"]);
 
 
-Route::get('/admin/dashboard', ["uses" => "Admin\AdminController@index", "as" => "admin.dashboard"]);
+
+Route::resource('/admin/dashboard', "Admin\AdminController", ["parameters" => ["dashboard" => "slug"]]);
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
