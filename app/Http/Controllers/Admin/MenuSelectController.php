@@ -68,9 +68,11 @@ class MenuSelectController extends MasterController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($menu)
     {
-        echo __METHOD__;
+        $this->breadcrumbs("menu_selectees", "_selected");
+        $select = $this->adn_menu_select->findBySlug($menu);
+        return $this->outputView("admin.templates.menus.selectees.show", "select", $select);
     }
 
     /**
@@ -79,9 +81,13 @@ class MenuSelectController extends MasterController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($menu)
     {
-
+        $this->breadcrumbs("menu_selectees", "_selected");
+        $select = $this->adn_menu_select->findBySlug($menu);
+        $adn_menus = $this->admin_menu->get();
+        $adn_menu_selects = $this->adn_menu_select->get();
+        return $this->outputView("admin.templates.menus.selectees.edit", ["select", "adn_menu_selects", "adn_menus"], [$select, $adn_menu_selects, $adn_menus]);
     }
 
     /**
@@ -91,9 +97,17 @@ class MenuSelectController extends MasterController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MenuSelectRequest $request, $menu)
     {
-        echo __METHOD__;
+        $data = $request->except("_token", "_method");
+        $menu = $this->adn_menu_select->findBySlug($menu);
+        $menu->update([
+            "slug"                  =>  $data["slug"],
+            "admin_menu_id"         =>  $data["menu_id"],
+            "select_id"             =>  $data["select_menu_id"],
+            "active"                =>  $data["active"],
+        ]);
+        return redirect()->route('admin.menu_selectees.index')->with("success", "Выборка меню сайта успешно обновлен!");
     }
 
     /**
@@ -102,8 +116,14 @@ class MenuSelectController extends MasterController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($menu)
     {
-        echo __METHOD__;
+        $menu = $this->adn_menu_select->findBySlug($menu);
+
+        // $menu->admin_menu_id = 0;
+        // $menu->select_id = 0;
+        // $menu->update($menu->toArray());
+        // dd($menu);
+        return redirect()->route('admin.menu_selectees.index')->with("success", "Выборка меню сайта успешно удален");
     }
 }

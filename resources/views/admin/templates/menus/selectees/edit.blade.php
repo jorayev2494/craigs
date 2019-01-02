@@ -21,61 +21,75 @@
             <div class="panel-body">
                 <p class="content-group-lg">Extend form controls by adding text or buttons before, after, th sides of any text-based <code>&lt;input></code>. s <code>.input-group</code> with an <code>.input-group-addon</code> to prepend or append elements to a single <code>.form-control</code>. Place one add-on or button on either side of an input. You may also place one on both sides of an input. Multiple add-ons on a single side and multiple form-controls in a single input group arent supported.</p>
 
-                {!! Form::open(["url" => route("admin.menus.update", ["slug" => $menu->slug]), "method" => "PUT", "class" => "form-horizontal"]) !!}
+                {!! Form::open(["url" => route("admin.menu_selectees.update", ["slug" => $select->slug]), "method" => "PUT", "class" => "form-horizontal"]) !!}
 
                     <fieldset class="content-group">
 
                         <legend class="text-bold">Text addon</legend>
 
                         <div class="form-group">
-                            <label for="slug" class="control-label col-lg-2">Перевод раздела</label>
+                            <label for="icon" class="control-label col-lg-2">Слуг</label>
                             <div class="col-lg-10">
                                 <div class="input-group">
-                                    {!! Form::text("slug", trans("lang." . $menu->slug), ["class" => "form-control", "id" => "slug", "readonly" => "readonly"]) !!}
-                                    <span class="input-group-addon">@lang("lang." . $menu->slug)</span>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="slug" class="control-label col-lg-2">Слаг раздела</label>
-                            <div class="col-lg-10">
-                                <div class="input-group">
-                                    {!! Form::text("slug", $menu->slug, ["class" => "form-control", "id" => "slug", "placeholder" => "Slug"]) !!}
-                                    <span class="input-group-addon">@lang("lang.slug")</span>
+                                    <span class="input-group-addon">Слуг</span>
+                                    {!! Form::text("slug", $select->slug, ["class" => "form-control", "id" => "icon", "placeholder" => "Select Icon"]) !!}
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="slug" class="control-label col-lg-2">Группа</label>
+                            <label for="slug" class="control-label col-lg-2">Выберие под раздел</label>
                             <div class="col-lg-10">
                                 <div class="input-group">
-                                    <span class="input-group-addon">Гркппированть по</span>
-                                    {!! Form::text("group", $menu->group, ["class" => "form-control", "id" => "slug", "placeholder" => "Name group"]) !!}
+
+                                    <span class="input-group-addon">@lang('lang.slug')</span>
+
+                                    <select name="menu_id" id="menu_id" class="form-control">
+                                        <option disabled value="0">Выберите меню сайта</option>
+                                        <option selected value="{{ $select->menus->id }}">@lang("lang." . $select->menus->slug)</option>
+                                        @foreach ($adn_menus as $menu)
+
+                                            @if ($select->menus->id == $menu->id)
+                                                @continue
+                                            @endif
+
+                                            <option value="{{ $menu->id }}">@lang("lang." . $menu->slug)</option>
+                                        @endforeach
+                                    </select>
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="icon" class="control-label col-lg-2">Значек раздела</label>
+                            <label for="slug" class="control-label col-lg-2">Выберие под раздел</label>
                             <div class="col-lg-10">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="{{ $menu->icon ?? '*' }}"></i>
-                                    </span>
-                                    {!! Form::text("icon", $menu->icon, ["class" => "form-control", "id" => "icon", "placeholder" => "Select Icon"]) !!}
+
+                                    <span class="input-group-addon">@lang('lang.slug')</span>
+
+                                    <select name="select_menu_id" id="select_menu" class="form-control">
+                                        <option selected disabled value="0">Выберите меню сайта</option>
+                                        <option selected value="{{ $select->oneSelect->id }}">@lang("lang." . $select->oneSelect->slug)</option>
+                                        @foreach ($adn_menu_selects as $sel_menu)
+                                            @if ($select->oneSelect->id == $sel_menu->id)
+                                                @continue
+                                            @endif
+                                            <option value="{{ $sel_menu->id }}">@lang("lang." . $sel_menu->slug)</option>
+                                        @endforeach
+                                    </select>
+
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="form-group">
                             <label for="active" class="control-label col-lg-2">Актиность</label>
                             <div class="col-lg-10">
                                 {{-- <div class="input-group"> --}}
                                     <select name="active" id="active" class="form-control">
-                                        <option selected value="{{ $menu->active ? 1 : 0 }}">{{ $menu->active ? trans("lang.not_active") : trans("lang.not_active") }}</option>
+                                        {{-- <option selected disabled value="opt1">Select Active</option> --}}
                                         <option value="1">@lang("lang.active")</option>
                                         <option value="0">@lang("lang.not_active")</option>
                                     </select>
@@ -84,10 +98,13 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success btn-labeled btn-lg pull-right">
-                            <b><i class="icon-loop3"></i></b>
-                            @lang("lang.update")
-                        </button>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <div class="input-group pull-right">
+                                    {!! Form::submit("update", ["class" => "btn btn-primary"]) !!}
+                                </div>
+                            </div>
+                        </div>
 
                     </fieldset>
 

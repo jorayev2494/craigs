@@ -57,12 +57,12 @@
                             <td>@lang("lang." . $select->slug)</td>
                             <td>{{ $select->slug }}</td>
                             <td>
-                                <i class="{{ $select->menus->icon ?? '*' }}"></i>
+                                <i class="{{ $select->menus->icon }}"></i>
                                 @lang("lang." . $select->menus->slug)
                             </td>
 
                             {{-- <td>{{ $select->mYselect ? trans("lang." . $select->mYselect->slug) . " " . $select->mYselect->id : null }}</td> --}}
-                            <td>{{ $select->oneSelect ? trans("lang." . $select->oneSelect->slug) . " " . $select->oneSelect->id : null }}</td>
+                            <td>{{ $select->oneSelect ? trans("lang." . $select->oneSelect->slug) : null }}</td>
 
                             <td>
                                 @if ($select->active)
@@ -77,7 +77,7 @@
 
                                     <div class="btn pull-right">
                                         <a href="#">
-                                            {!! Form::open(["url" => route("admin.menus.destroy", ["slug" => $select->slug]), "method" => "DELETE"]) !!}
+                                            {!! Form::open(["url" => route("admin.menu_selectees.destroy", ["slug" => $select->slug]), "method" => "DELETE"]) !!}
                                                 <button type="submit" class="btn-link text-default">
                                                     <i class="icon-trash position-left"></i>
                                                     @lang("lang.delete")
