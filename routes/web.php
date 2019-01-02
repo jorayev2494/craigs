@@ -13,11 +13,14 @@ use App\Repository\Repository;
 |
 */
 
-Route::get('/{uuid}', ["uses" => "IndexController@index", "as" => "index"]);
+Route::get('/{uuid?}', ["uses" => "IndexController@index", "as" => "index"]);
 
+// admin/
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('/menu', "Admin\AdminController", ["parameters" => ["dashboard" => "slug"]]);
+    Route::resource('/dashboard', "Admin\AdminController", ["parameters" => ["dashboard" => "slug"]]);
+});
 
-
-Route::resource('/admin/dashboard', "Admin\AdminController", ["parameters" => ["dashboard" => "slug"]]);
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

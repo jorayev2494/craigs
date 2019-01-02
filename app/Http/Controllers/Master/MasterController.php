@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Master;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Support\Arr;
 use View;
 
@@ -34,7 +35,7 @@ class MasterController extends Controller
      */
     public function outputView($view, $dataName = false, $data = false)
     {
-        $this->vars = Arr::add($this->vars, "title", $this->title);
+        // $this->vars = Arr::add($this->vars, "title", $this->title);
 
         if ($dataName) {
             if (is_array($dataName) && is_array($data)) {
@@ -76,6 +77,25 @@ class MasterController extends Controller
         // dd($this->vars);
         return response()->json($this->vars, 200);
 
+    }
+
+    /**
+     * Получить хлебные крошки сайта
+     *
+     * @param boolean $name
+     * @return void
+     */
+    public function breadcrumbs(string $name = null, string $title = null)
+    {
+        if ($name) {
+            $breadcrumbs = Breadcrumbs::render($name);
+            $this->vars = Arr::add($this->vars, "breadcrumbs", $breadcrumbs);
+        }
+
+        if ($title) {
+            $this->vars = Arr::add($this->vars, "title", $this->title);
+        }
+        abort_if($name && $title, 404);
     }
 
 }

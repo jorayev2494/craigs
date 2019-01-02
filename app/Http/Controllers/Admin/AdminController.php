@@ -9,12 +9,19 @@ use App\Models\Admin\AdminMenu;
 use App\Models\Admin\AdminMenuSelect;
 use App\Http\Requests\Admin\AdminSidebarRequest;
 
+
 class AdminController extends MasterController
 {
 
     public function __construct() {
         $this->admin_menu = new Repository(new AdminMenu);
         $this->admin_menu_select = new Repository(new AdminMenuSelect);
+
+        $back = request()->header("referer");
+
+        // $this->breadcrumbs("Admin Dashboard");
+
+
     }
 
     /**
@@ -24,6 +31,7 @@ class AdminController extends MasterController
      */
     public function index()
     {
+        $this->breadcrumbs("Admin Dashboard");
         $admin_menus = $this->admin_menu->get();
         $admin_menu_selects = $this->admin_menu_select->get();
         // return $this->outputView("admin.templates.index");
@@ -37,6 +45,7 @@ class AdminController extends MasterController
      */
     public function create()
     {
+        $this->breadcrumbs("Admin Dashboard");
         return $this->outputView("admin.templates.admin_sidebars.create");
     }
 

@@ -17,6 +17,7 @@ class CreateAdminMenusTable extends Migration
             $table->increments('id');
             $table->string('icon', 50)->default('fa fa-wrench');
             $table->string('slug', 100);
+            $table->string('sort', 50)->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

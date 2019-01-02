@@ -59,7 +59,10 @@
                 <!-- /main sidebar -->
 
                 <!-- Main content -->
+
                 <div class="content-wrapper">
+
+                    {{-- @dump([url()->current(), url()->full(), url()->previous(), back()->content(), request()->header("referer")]) --}}
 
                     <!-- Page header -->
                     <div class="page-header">
@@ -78,11 +81,12 @@
                         </div>
 
                         <div class="breadcrumb-line breadcrumb-line-component">
-                            <ul class="breadcrumb">
+                            {!! $breadcrumbs !!}
+                            {{-- <ul class="breadcrumb">
                                 <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
                                 <li><a href="datatable_data_sources.html">Datatables</a></li>
                                 <li class="active">Data sources</li>
-                            </ul>
+                            </ul> --}}
 
                             <ul class="breadcrumb-elements">
                                 <li><a href="#"><i class="icon-comment-discussion position-left"></i> Support</a></li>
@@ -106,9 +110,7 @@
                     </div>
                     <!-- /page header -->
 
-                    <div class="panel-heading">
-                        @include("admin.includes.alert_session")
-                    </div>
+                    @include("admin.includes.alert_session")
 
                     <!-- Content area -->
                     @yield('content')

@@ -4,8 +4,6 @@
 
 @section('content')
 
-    
-
     <div class="content">
 
         <div class="panel panel-flat">

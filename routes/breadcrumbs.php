@@ -1,8 +1,13 @@
 <?php
 
     // Home
-    Breadcrumbs::for('home', function ($trail) {
-        $trail->push('Home', route('home'));
+    Breadcrumbs::for('Admin Dashboard', function ($trail) {
+        $trail->push('Dashboard', route('dashboard.index'));
+    });
+
+    Breadcrumbs::for('test', function ($trail) {
+        $trail->parent('dashboard.index');
+        $trail->push('TEST', route('home'));
     });
 
 

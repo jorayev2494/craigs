@@ -19,11 +19,10 @@
             </div>
 
             <div class="panel-heading">
-                <a hred="{{ route('dashboard.create') }}" class="btn btn-info btn-labeled pull-right">
+                <a href="{{ route('dashboard.create') }}" class="btn btn-info btn-labeled pull-right">
                     <b><i class="icon-plus2 position-left"></i></b>
                     Create
                 </a>
-                {{-- <a href="{{ route('dashboard.create') }}" class="btn btn-primary">Create</a> --}}
             </div>
 
             {{-- <div class="panel-body">
