@@ -97,4 +97,15 @@ class MasterController extends Controller
         $this->vars = Arr::add($this->vars, "title", $this->title);
     }
 
+    /**
+     * Загрузка сайт бар меню
+     *
+     * @return void
+     */
+    protected function adminSidebar()
+    {
+        $admin_menus = $this->admin_menu->get();
+        $this->vars = Arr::add($this->vars, "admin_menus", $admin_menus);
+    }
+
 }

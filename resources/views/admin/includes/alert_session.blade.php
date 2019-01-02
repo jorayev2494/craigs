@@ -70,13 +70,21 @@
         </div>
     </div>
 @endif
-{{-- <div class="alert bg-danger alert-styled-left">
-    <button type="button" class="close" data-dismiss="alert">
-        <span>&times;</span>
-        <span class="sr-only">Close</span>
-    </button>
-    <span class="text-semibold">Oh snap!</span> Change a few things up and <a href="#" class="alert-link">try submitting again</a>.
-</div> --}}
+
+@if (session()->has("danger"))
+    <div class="panel-heading">
+        <div class="alert bg-danger alert-styled-left">
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            {{-- <span class="text-semibold">Oh snap!</span> Change a few things up and <a href="#" class="alert-link">try submitting again</a>. --}}
+            <ul>
+                <li>{{ session()->pull("danger") }}</li>
+            </ul>
+        </div>
+    </div>
+@endif
 
 @if ($errors->any())
     <div class="panel-heading">

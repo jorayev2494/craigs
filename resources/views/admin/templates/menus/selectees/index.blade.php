@@ -39,7 +39,7 @@
             <table class="table datatable-html">
                 <thead>
                     <tr>
-                        <th class="text-center">id</th>
+                        <th class="text-center">#</th>
                         <th class="text-center">@lang("lang.title")</th>
                         <th class="text-center">@lang("lang.slug")</th>
                         <th class="text-center">@lang("lang.menu_select")</th>

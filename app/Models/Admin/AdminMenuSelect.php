@@ -25,8 +25,9 @@ class AdminMenuSelect extends Model
      */
     public function MySelect()
     {
-        return $this->hasOne($this, 'select_id', 'id');
+        return $this->hasMany($this, 'select_id', 'id');
     }
+
 
     /**
      * Обратная связь к своему полю select_id

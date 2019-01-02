@@ -27,8 +27,8 @@ class AdminSidebarRequest extends FormRequest
     {
         return [
             "icon"      =>  "required|string|min:4|max:30",
-            "slug"      =>  "required|unique:admin_menus,id,$this->slug|alpha|min:4|max:20",
-            "group"     =>  "required|alpha|min:4|max:20",
+            "slug"      =>  "required|unique:admin_menus,slug,$this->slug|alpha|min:4|max:20",
+            "group"     =>  "string|alpha|min:4|max:20",
             "active"    =>  "required|integer|min:0|max:1",
         ];
     }

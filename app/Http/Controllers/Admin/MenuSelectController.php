@@ -15,6 +15,7 @@ class MenuSelectController extends MasterController
     public function __construct() {
         $this->admin_menu = new Repository(new AdminMenu);
         $this->adn_menu_select = new Repository(new AdminMenuSelect);
+        $this->adminSidebar();
     }
     /**
      * Display a listing of the resource.
@@ -55,7 +56,7 @@ class MenuSelectController extends MasterController
         $test = $this->adn_menu_select->create([
             "slug"                  =>  $data["slug"],
             "admin_menu_id"         =>  $data["menu_id"],
-            "select_id"             =>  $data["select_menu_id"],
+            "select_id"             =>  $data["select_menu_id"] ?? null,
             "active"                =>  $data["active"],
         ]);
 
@@ -87,7 +88,7 @@ class MenuSelectController extends MasterController
         $select = $this->adn_menu_select->findBySlug($menu);
         $adn_menus = $this->admin_menu->get();
         $adn_menu_selects = $this->adn_menu_select->get();
-        return $this->outputView("admin.templates.menus.selectees.edit", ["select", "adn_menu_selects", "adn_menus"], [$select, $adn_menu_selects, $adn_menus]);
+        return $this->outputView("admin.templates.menus.selectees.edit", ["select", "adn_menu_selects", "adn_menus", "admin_menus"], [$select, $adn_menu_selects, $adn_menus, $adn_menus]);
     }
 
     /**
@@ -104,7 +105,7 @@ class MenuSelectController extends MasterController
         $menu->update([
             "slug"                  =>  $data["slug"],
             "admin_menu_id"         =>  $data["menu_id"],
-            "select_id"             =>  $data["select_menu_id"],
+            "select_id"             =>  $data["select_menu_id"] ?? null,
             "active"                =>  $data["active"],
         ]);
         return redirect()->route('admin.menu_selectees.index')->with("success", "Выборка меню сайта успешно обновлен!");
@@ -124,6 +125,7 @@ class MenuSelectController extends MasterController
         // $menu->select_id = 0;
         // $menu->update($menu->toArray());
         // dd($menu);
-        return redirect()->route('admin.menu_selectees.index')->with("success", "Выборка меню сайта успешно удален");
+        return redirect()->route('admin.menu_selectees.index')->with("danger", "Выборка меню сайта невозможно удалить");
+        // return redirect()->route('admin.menu_selectees.index')->with("success", "Выборка меню сайта успешно удален");
     }
 }

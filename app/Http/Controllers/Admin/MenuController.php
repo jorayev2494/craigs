@@ -16,6 +16,7 @@ class MenuController extends MasterController
     public function __construct() {
         $this->admin_menu = new Repository(new AdminMenu);
         $this->admin_menu_select = new Repository(new AdminMenuSelect);
+        $this->adminSidebar();
     }
 
     /**
@@ -26,9 +27,7 @@ class MenuController extends MasterController
     public function index()
     {
         $this->breadcrumbs("Admin menu", "Admin");
-        $admin_menus = $this->admin_menu->get();
-        $admin_menu_selects = $this->admin_menu_select->get();
-        return $this->outputView("admin.templates.menus.index", "admin_menus", $admin_menus);
+        return $this->outputView("admin.templates.menus.index");
     }
 
     /**

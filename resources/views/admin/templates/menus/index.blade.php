@@ -42,6 +42,7 @@
                         <th class="text-center">@lang("lang.icon")</th>
                         <th class="text-center">@lang("lang.title")</th>
                         <th class="text-center">@lang("lang.slug")</th>
+                        <th class="text-center">@lang("lang.group")</th>
                         <th class="text-center">@lang("lang.active")</th>
                         <th class="text-right">@lang("lang.actions")</th>
                     </tr>
@@ -56,6 +57,7 @@
                             </td>
                             <td>@lang("lang." . $menu->slug)</td>
                             <td>{{ $menu->slug }}</td>
+                            <td>{{ $menu->group }}</td>
                             <td>
                                 @if ($menu->active)
                                     <span class="label label-success">@lang("lang.active")</span>
