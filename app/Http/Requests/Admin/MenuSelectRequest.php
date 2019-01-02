@@ -3,10 +3,8 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Repository\Repository;
-use App\Models\Admin\AdminMenu;
 
-class AdminSidebarRequest extends FormRequest
+class MenuSelectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +24,10 @@ class AdminSidebarRequest extends FormRequest
     public function rules()
     {
         return [
-            "icon"      =>  "required|string|min:4|max:30",
-            "slug"      =>  "required|unique:admin_menus,id,$this->slug|alpha|min:4|max:20",
-            "group"     =>  "required|alpha|min:4|max:20",
-            "active"    =>  "required|integer|min:0|max:1",
+            "slug"              =>  "required|unique:admin_menu_selects,id,$this->slug|alpha|min:4|max:20",
+            "menu_id"           =>  "required|integer|exists:admin_menus,id",
+            "select_menu_id"    =>  "integer|exists:admin_menu_selects,id",
+            "active"            =>  "required|integer|min:0|max:1",
         ];
     }
 }

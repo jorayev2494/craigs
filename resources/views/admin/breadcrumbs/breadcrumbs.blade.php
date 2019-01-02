@@ -10,7 +10,7 @@
 
         @foreach ($breadcrumbs as $breadcrumb)
         {{-- @dd($loop->last) --}}
-            @if ($breadcrumb->url == route("dashboard.index"))
+            @if ($breadcrumb->url == route("admin.dashboards.index"))
 
                 @if ($breadcrumb->url && !$loop->last)
                     <li>

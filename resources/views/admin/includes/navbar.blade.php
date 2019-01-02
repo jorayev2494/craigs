@@ -252,7 +252,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('dashboard.index') }}"><i class="icon-menu2"></i>Setting Sidebar</a>
+                        <a href="{{ route('admin.menus.index') }}"><i class="icon-menu2"></i>Setting Sidebar</a>
                     </li>
 
                     <li>

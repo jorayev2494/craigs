@@ -15,10 +15,11 @@ use App\Repository\Repository;
 
 Route::get('/{uuid?}', ["uses" => "IndexController@index", "as" => "index"]);
 
-// admin/
-Route::group(['prefix' => 'admin'], function () {
-    Route::resource('/menu', "Admin\AdminController", ["parameters" => ["dashboard" => "slug"]]);
-    Route::resource('/dashboard', "Admin\AdminController", ["parameters" => ["dashboard" => "slug"]]);
+Route::group(['prefix' => 'admin', "as" => "admin."], function () {
+    // admin/menu_selects
+    Route::resource('/menus', "Admin\MenuController", ["parameters" => ["dashboard" => "menu"]]);
+    Route::resource('/menu_selectees', "Admin\MenuSelectController", ["parameters" => ["menu_selectees" => "select"]]);
+    Route::resource('/dashboards', "Admin\MenuController", ["parameters" => ["dashboard" => "slug"]]);
 });
 
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Support\Arr;
 use View;
+use Lang;
 
 class MasterController extends Controller
 {
@@ -17,7 +18,7 @@ class MasterController extends Controller
 
     // Данные Сайдбар Администратора
     protected $admin_sidebar;
-    protected $admin_menu_select;
+    protected $adn_menu_select;
 
     #region Данные к виду
     protected $title = null;
@@ -85,17 +86,15 @@ class MasterController extends Controller
      * @param boolean $name
      * @return void
      */
-    public function breadcrumbs(string $name = null, string $title = null)
+    public function breadcrumbs(string $breadName = null, string $title = null)
     {
-        if ($name) {
-            $breadcrumbs = Breadcrumbs::render($name);
-            $this->vars = Arr::add($this->vars, "breadcrumbs", $breadcrumbs);
-        }
+        // Проверка хлебного крошки сайта
+        $breadcrumbs = $breadName ? Breadcrumbs::render($breadName) : abort(404);
+        $this->vars = Arr::add($this->vars, "breadcrumbs", $breadcrumbs);
 
-        if ($title) {
-            $this->vars = Arr::add($this->vars, "title", $this->title);
-        }
-        abort_if($name && $title, 404);
+        // Проверка Титульный текст сайта
+        $this->title = $title ? Lang::get("lang." . $title) : abort(404);
+        $this->vars = Arr::add($this->vars, "title", $this->title);
     }
 
 }
