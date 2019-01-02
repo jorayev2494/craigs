@@ -13,9 +13,22 @@ class AdminMenu extends Model
      *
      * @return void
      */
-    public function selectees()
+    public function selectees(bool $active = false)
     {
+        if ($active) {
+            return $this->hasMany(AdminMenuSelect::class, 'admin_menu_id', 'id')->where("active", $active);
+        }
         return $this->hasMany(AdminMenuSelect::class, 'admin_menu_id', 'id');
+    }
+
+    /**
+     * Отношение Многие ко Многим с выборкой под раздела меню
+     *
+     * @return void
+     */
+    public function selecteesActive()
+    {
+        return $this->hasMany(AdminMenuSelect::class, 'admin_menu_id', 'id')->where("active", true);
     }
 
 

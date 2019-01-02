@@ -104,7 +104,9 @@ class MasterController extends Controller
      */
     protected function adminSidebar()
     {
-        $admin_menus = $this->admin_menu->get();
+        $admin_menus = $this->admin_menu->get("*", true);
+        $admin_menus->load("selecteesActive");
+        // dd($admin_menus);
         $this->vars = Arr::add($this->vars, "admin_menus", $admin_menus);
     }
 

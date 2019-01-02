@@ -18,10 +18,12 @@ class Repository
      * @param string $select
      * @return void
      */
-    public function get($select = "*")
+    public function get($select = "*", bool $active = false)
     {
-        $builder = $this->model->select($select)->get();
-        return $builder;
+        if ($active) {
+            return $this->model->select($select)->where("active", "=", $active)->get();
+        }
+        return $this->model->select($select)->get();;
     }
 
     /**
