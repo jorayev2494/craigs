@@ -7,7 +7,7 @@
 
         <div class="panel panel-flat">
             <div class="panel-heading">
-                <h5 class="panel-title">{{ $title }}</h5>
+                <h5 class="panel-title">Input group addons</h5>
                 <div class="heading-elements">
                     <ul class="icons-list">
                         <li><a data-action="collapse"></a></li>
@@ -25,62 +25,61 @@
                     <legend class="text-bold">Text addon</legend>
 
                     <div class="form-group">
-                        <label for="icon" class="control-label col-lg-2">Слуг</label>
+                        <label for="icon" class="control-label col-lg-2">Default text input</label>
                         <div class="col-lg-10">
                             <div class="input-group">
-                                <span class="input-group-addon">Слуг</span>
-                                {!! Form::text("slug", $select->slug, ["class" => "form-control", "id" => "icon", "readonly", "placeholder" => "Select Icon"]) !!}
+                                <span class="input-group-addon">Icon</span>
+                                {!! Form::text("slug", $menu->slug, ["class" => "form-control", "id" => "icon", "readonly" => "readonly"]) !!}
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="slug" class="control-label col-lg-2">Выберие под раздел</label>
+                        <label for="icon" class="control-label col-lg-2">Default text input</label>
                         <div class="col-lg-10">
                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="{{ $select->menus->icon }}"></i>
-                                </span>
-                                {!! Form::text("slug", trans("lang." . $select->menus->slug), ["class" => "form-control", "id" => "icon", "readonly", "placeholder" => "Select Icon"]) !!}
+                                <span class="input-group-addon">Icon</span>
+                                {!! Form::text("icon", $menu->icon, ["class" => "form-control", "id" => "icon", "readonly" => "readonly"]) !!}
                             </div>
                         </div>
                     </div>
 
-                    {{-- @dd($select->OneSelect) --}}
-
                     <div class="form-group">
-                        <label for="slug" class="control-label col-lg-2">Выберие под раздел</label>
+                        <label for="slug" class="control-label col-lg-2">Default text input</label>
                         <div class="col-lg-10">
                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    Select
-                                </span>
-                                {!! Form::text("slug", $select->OneSelect ? trans("lang." . $select->OneSelect->slug) : trans("lang.not_indicated"), ["class" => "form-control", "id" => "icon", "readonly", "placeholder" => "Select Icon"]) !!}
+                                {!! Form::text("slug", $menu->slug, ["class" => "form-control", "id" => "slug", "readonly" => "readonly"]) !!}
+                                <span class="input-group-addon">Slug</span>
                             </div>
                         </div>
                     </div>
 
-
                     <div class="form-group">
-                        <label for="active" class="control-label col-lg-2">Актиность</label>
+                        <label for="active" class="control-label col-lg-2">Default select</label>
                         <div class="col-lg-10">
-                            {!! Form::text("slug", $select->active ? trans("lang.active") : trans("lang.not_active"), ["class" => "form-control", "id" => "icon", "readonly", "placeholder" => "Select Icon"]) !!}
+                            {{-- <div class="input-group"> --}}
+                                <div class="input-group">
+                                    {!! Form::text("active", $menu->active ? "Active" : "De Active", ["class" => "form-control", "id" => "slug", "readonly" => "readonly"]) !!}
+                                    <span class="input-group-addon">Slug</span>
+                                </div>
+                                {{-- <span class="input-group-addon">Active</span> --}}
+                            {{-- </div> --}}
                         </div>
                     </div>
 
                     <div class="form-group col-lg-12 pull-right">
                         <div class="input-group  pull-right">
-                            <a href="{{ route('admin.menu_selectees.edit', ['select' => $select->slug]) }}" class="btn btn-success btn-labeled btn-lg">
-                                <b><i class="icon-pen6"></i></b>
-                                @lang("lang.edit")
+                            <a href="{{ route('dashboard.edit', ['slug' => $menu->slug]) }}" class="btn btn-success btn-labeled btn-lg">
+                                <b><i class="icon-loop3"></i></b>
+                                Update
                             </a>
                         </div>
 
                         <div class="col-lg-2 pull-right">
-                            {!! Form::open(["url" => route("admin.menu_selectees.destroy", ["select" => $select->slug]), "method" => "DELETE"]) !!}
+                            {!! Form::open(["url" => route("dashboard.destroy", ["slug" => $menu->slug]), "method" => "DELETE"]) !!}
                                 <button type="submit" class="btn btn-danger btn-labeled btn-lg">
                                     <b><i class="icon-trash"></i></b>
-                                    @lang("lang.delete")
+                                    Delete
                                 </button>
                             {!! Form::close() !!}
                         </div>

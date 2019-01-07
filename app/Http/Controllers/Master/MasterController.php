@@ -8,6 +8,8 @@ use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Support\Arr;
 use View;
 use Lang;
+use App\Repository\Repository;
+use App\Models\Admin\AdminMenu;
 
 class MasterController extends Controller
 {
@@ -17,7 +19,7 @@ class MasterController extends Controller
 
 
     // Данные Сайдбар Администратора
-    protected $admin_sidebar;
+    protected $adn_sidebar;
     protected $adn_menu_select;
 
     #region Данные к виду
@@ -25,6 +27,10 @@ class MasterController extends Controller
     protected $template = null;
     protected $vars = array();
     #endregion
+
+    public function __construct() {
+        $this->adn_sidebar = new Repository(new AdminMenu);
+    }
 
     /**
      * Показать Интерфейс
@@ -104,9 +110,7 @@ class MasterController extends Controller
      */
     protected function adminSidebar()
     {
-        $admin_menus = $this->admin_menu->get("*", true);
-        $admin_menus->load("selecteesActive");
-        // dd($admin_menus);
+        $admin_menus = $this->adn_sidebar->get("*", true);
         $this->vars = Arr::add($this->vars, "admin_menus", $admin_menus);
     }
 

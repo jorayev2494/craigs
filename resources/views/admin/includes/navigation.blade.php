@@ -17,14 +17,14 @@
                             <span>@lang("lang." . $menu->slug)</span>
                         </a>
 
-                        @if (count($menu->selecteesActive) !== 0)
+                        @if (count($menu->selectees) !== 0)
                             {{-- {{ $menu->forget() }} --}}
-                            @dd($menu->selecteesActive[0]->MySelect)
+                            {{-- @dd($menu->selecteesActive[0]->MySelect) --}}
                             <ul>
                                 @foreach ($menu->selectees as $select)
                                     @if ($select->active)
                                         <li>
-                                            <a href="{{ ($select->slug !== 'test') ? route($select->slug) : '#test' }}">@lang("lang." . $select->slug)</a>
+                                            <a href="{{ ($select->slug !== 'test') ? route('admin.' . $select->slug . '.index') : '#test' }}">@lang("lang." . $select->slug)</a>
                                             @if (count($select->MySelect))
                                                 <ul>
                                                     @foreach ($select->MySelect as $oneSelect)

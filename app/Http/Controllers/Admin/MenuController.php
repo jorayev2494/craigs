@@ -14,7 +14,7 @@ class MenuController extends MasterController
 {
 
     public function __construct() {
-        $this->admin_menu = new Repository(new AdminMenu);
+        parent::__construct();
         $this->admin_menu_select = new Repository(new AdminMenuSelect);
         $this->adminSidebar();
     }
@@ -26,7 +26,7 @@ class MenuController extends MasterController
      */
     public function index()
     {
-        $this->breadcrumbs("Admin menu", "Admin");
+        $this->breadcrumbs("Admin Sidebar", "selectees_sidebar");
         return $this->outputView("admin.templates.menus.index");
     }
 
@@ -37,7 +37,7 @@ class MenuController extends MasterController
      */
     public function create()
     {
-        $this->breadcrumbs("Admin menu", "test");
+        $this->breadcrumbs("Admin Sidebar", "create_sidebar");
         return $this->outputView("admin.templates.menus.create");
     }
 
@@ -50,7 +50,7 @@ class MenuController extends MasterController
     public function store(AdminSidebarRequest $request)
     {
         $data = $request->except("_token");
-        $this->admin_menu->create($data);
+        $this->adn_sidebar->create($data);
         return redirect()->route('admin.menus.index')->with("success", "Меню сайта успешно создан!");
     }
 
@@ -62,8 +62,8 @@ class MenuController extends MasterController
      */
     public function show($slug)
     {
-        $this->breadcrumbs("Admin menu", "test");
-        $menu = $this->admin_menu->findBySlug($slug);
+        $this->breadcrumbs("Admin Sidebar", "test");
+        $menu = $this->adn_sidebar->findBySlug($slug);
         return $this->outputView("admin.templates.menus.show", "menu", $menu);
     }
 
@@ -75,8 +75,8 @@ class MenuController extends MasterController
      */
     public function edit($slug)
     {
-        $this->breadcrumbs("Admin menu", "test");
-        $menu = $this->admin_menu->findBySlug($slug);
+        $this->breadcrumbs("Admin Sidebar", "test");
+        $menu = $this->adn_sidebar->findBySlug($slug);
         return $this->outputView("admin.templates.menus.edit", "menu", $menu);
     }
 
@@ -89,7 +89,7 @@ class MenuController extends MasterController
      */
     public function update(AdminSidebarRequest $request, $slug)
     {
-        $menu = $this->admin_menu->findBySlug($slug);
+        $menu = $this->adn_sidebar->findBySlug($slug);
         $menu->update($request->except("_token", "_method"));
         return redirect()->route('admin.menus.index')->with("success", "Меню сайта успешно обновлен!");
     }
@@ -102,7 +102,7 @@ class MenuController extends MasterController
      */
     public function destroy($slug)
     {
-        $menu = $this->admin_menu->findBySlug($slug);
+        $menu = $this->adn_sidebar->findBySlug($slug);
         $menu->delete();
         return redirect()->route('admin.menus.index')->with("success", "Меню сайта успешно удален");
     }

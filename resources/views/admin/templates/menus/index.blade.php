@@ -67,64 +67,33 @@
                             </td>
 
                             <td class="text-center">
-                                {{-- <center> --}}
 
-                                    <div class="btn pull-right">
-                                        <a href="#">
-                                            {!! Form::open(["url" => route("admin.menus.destroy", ["slug" => $menu->slug]), "method" => "DELETE"]) !!}
-                                                <button type="submit" class="btn-link text-default">
-                                                    <i class="icon-trash position-left"></i>
-                                                    @lang("lang.delete")
-                                                </button>
-                                            {!! Form::close() !!}
-                                        </a>
-                                    </div>
-
-                                    <div class="btn pull-right">
-                                        <a href="{{ route('admin.menus.show', ['menu' => $menu->slug]) }}" class="text-default pull-left">
-                                            <i class="icon-eye"></i>
-                                            @lang("lang.look")
-                                        </a>
-                                    </div>
-
-                                    <div class="btn pull-right">
-                                        <a href="{{ route('admin.menus.edit', ['menu' => $menu->slug]) }}" class="text-default pull-left">
-                                            <i class="icon-pen6"></i>
-                                            @lang("lang.edit")
-                                        </a>
-                                    </div>
-
-                                {{-- </center> --}}
-
-                                {{-- <ul class="icons-list pull-left">
-                                    <li class="dropdown">
-
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="icon-menu9"></i>
-                                        </a>
-
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li>
-                                                <a href="{{ route('admin.menus.show', ['slug' => $menu->slug]) }}">
-                                                    <i class="icon-eye"></i>
-                                                    Show
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('admin.menus.edit', ['slug' => $menu->slug]) }}">
-                                                    <i class="icon-pen6"></i>
-                                                    Edit
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="icon-trash"></i>
-                                                    Delete
-                                                </a>
-                                            </li>
-                                        </ul>
+                                <ul class="icons-list">
+                                    <li class="pull-right">
+                                        {!! Form::open(["url" => route("admin.menus.destroy", ["slug" => $menu->slug]), "method" => "DELETE"]) !!}
+                                            <button type="submit" class="btn-link text-danger-600">
+                                            {{-- <button type="submit" class="btn-link text-default"> --}}
+                                                <i class="icon-trash position-left"></i>
+                                                {{-- @lang("lang.delete") --}}
+                                            </button>
+                                        {!! Form::close() !!}
                                     </li>
-                                </ul> --}}
+
+                                    <li class="pull-right">
+                                        <a href="{{ route('admin.menus.show', ['menu' => $menu->slug]) }}">
+                                            <i class="icon-eye"></i>
+                                            {{-- @lang("lang.look") --}}
+                                        </a>
+                                    </li>
+
+                                    <li class="pull-right">
+                                        <a href="{{ route('admin.menus.edit', ['menu' => $menu->slug]) }}">
+                                            <i class="icon-pencil7"></i>
+                                            {{-- @lang("lang.edit") --}}
+                                        </a>
+                                    </li>
+                                </ul>
+
                             </td>
                         </tr>
 

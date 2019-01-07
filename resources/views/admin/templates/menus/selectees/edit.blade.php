@@ -71,7 +71,6 @@
                                     {{-- @dd($select->OneSelect) --}}
 
                                     <select name="select_menu_id" id="select_menu" class="form-control">
-                                        <option selected disabled value="0">Выберите меню сайта</option>
                                         <option selected value="{{ $select->OneSelect ? $select->OneSelect->id : null }}">{{ $select->OneSelect ? trans("lang.".$select->OneSelect->slug) : 'Выберите меню сайта' }}</option>
                                         @foreach ($adn_menu_selects as $sel_menu)
                                             @if ($select->OneSelect && $select->OneSelect->id == $sel_menu->id)

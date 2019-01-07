@@ -33,8 +33,15 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function getRouteKeyName()
+    // public function getRouteKeyName()
+    // {
+    //     return 'uuid';
+    // }
+
+
+    public function role()
     {
-        return 'uuid';
+        return $this->hasOne(Role::class, 'id', 'role_id');
     }
+
 }

@@ -1,19 +1,33 @@
 <?php
 
-    // Home
-    Breadcrumbs::for('Admin menu', function ($trail) {
-        $trail->push(trans("lang.dashboard"), route('admin.dashboards.index'));
-    });
+    #region Admin Breadcrumbs
+        // Test
+        Breadcrumbs::for('test', function ($trail) {
+            $trail->push(trans("lang.test"), route('admin.dashboards.index'));
+        });
 
-    Breadcrumbs::for('test', function ($trail) {
-        $trail->parent('Admin menu');
-        $trail->push(trans("lang.menu_dashboard"), route(''));
-    });
+        // Admin Home
+        Breadcrumbs::for('Admin Dashboard', function ($trail) {
+            $trail->push(trans("lang.dashboards"), route('admin.dashboards.index'));
+        });
 
-    // menu_selectees
-    Breadcrumbs::for('menu_selectees', function ($trail) {
-        $trail->parent('Admin menu');
-        $trail->push(trans("lang.menu_selectees"), route('admin.menu_selectees.index'));
-    });
+        // Admin Sidebar
+        Breadcrumbs::for('Admin Sidebar', function ($trail) {
+            $trail->parent('Admin Dashboard');
+            $trail->push(trans("lang.sidebar"), route('admin.menus.index'));
+        });
+
+        // Admin Sidebar Select
+        Breadcrumbs::for('Admin Sidebar Select', function ($trail) {
+            $trail->parent('Admin Sidebar');
+            $trail->push(trans("lang.selectees_sidebar"), route('admin.menu_selectees.index'));
+        });
+
+        // Admin Sidebar Select
+        Breadcrumbs::for('Admin Users', function ($trail) {
+            $trail->parent('Admin Dashboard');
+            $trail->push(trans("lang.users"), route('admin.users.index'));
+        });
+    #endregion
 
 ?>

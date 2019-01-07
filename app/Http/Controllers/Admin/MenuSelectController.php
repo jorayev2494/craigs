@@ -13,7 +13,7 @@ use App\Http\Requests\Admin\MenuSelectRequest;
 class MenuSelectController extends MasterController
 {
     public function __construct() {
-        $this->admin_menu = new Repository(new AdminMenu);
+        parent::__construct();
         $this->adn_menu_select = new Repository(new AdminMenuSelect);
         $this->adminSidebar();
     }
@@ -24,8 +24,8 @@ class MenuSelectController extends MasterController
      */
     public function index()
     {
-        $this->breadcrumbs("menu_selectees", "menu_selectees");
-        $adn_menus = $this->admin_menu->get();
+        $this->breadcrumbs("Admin Sidebar Select", "menu_selectees");
+        $adn_menus = $this->adn_sidebar->get();
         $adn_menu_selects = $this->adn_menu_select->get();
         return $this->outputView("admin.templates.menus.selectees.index", ["adn_menu_selects", "adn_menus"], [$adn_menu_selects, $adn_menus]);
     }
@@ -37,8 +37,8 @@ class MenuSelectController extends MasterController
      */
     public function create()
     {
-        $this->breadcrumbs("menu_selectees", "create_selected");
-        $adn_menus = $this->admin_menu->get();
+        $this->breadcrumbs("Admin Sidebar Select", "menu_selectees");
+        $adn_menus = $this->adn_sidebar->get();
         $adn_menu_selects = $this->adn_menu_select->get();
         return $this->outputView("admin.templates.menus.selectees.create", ["adn_menu_selects", "adn_menus"], [$adn_menu_selects, $adn_menus]);
     }
@@ -71,7 +71,7 @@ class MenuSelectController extends MasterController
      */
     public function show($menu)
     {
-        $this->breadcrumbs("menu_selectees", "_selected");
+        $this->breadcrumbs("Admin Sidebar Select", "menu_selectees");
         $select = $this->adn_menu_select->findBySlug($menu);
         return $this->outputView("admin.templates.menus.selectees.show", "select", $select);
     }
@@ -84,9 +84,9 @@ class MenuSelectController extends MasterController
      */
     public function edit($menu)
     {
-        $this->breadcrumbs("menu_selectees", "_selected");
+        $this->breadcrumbs("Admin Sidebar Select", "menu_selectees");
         $select = $this->adn_menu_select->findBySlug($menu);
-        $adn_menus = $this->admin_menu->get();
+        $adn_menus = $this->adn_sidebar->get();
         $adn_menu_selects = $this->adn_menu_select->get();
         return $this->outputView("admin.templates.menus.selectees.edit", ["select", "adn_menu_selects", "adn_menus", "admin_menus"], [$select, $adn_menu_selects, $adn_menus, $adn_menus]);
     }
