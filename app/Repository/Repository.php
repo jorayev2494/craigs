@@ -18,12 +18,20 @@ class Repository
      * @param string $select
      * @return void
      */
-    public function get($select = "*", bool $active = false)
+    public function get($select = "*")
     {
-        if ($active) {
-            return $this->model->select($select)->where("active", "=", $active)->get();
-        }
-        return $this->model->select($select)->get();;
+        return $this->model->select($select)->get();
+    }
+
+    /**
+     * Получить все Активный данные из Бд-х
+     *
+     * @param string $select
+     * @return void
+     */
+    public function getActive($select = "*")
+    {
+        return $this->model->select($select)->where("active", true)->get();
     }
 
     /**

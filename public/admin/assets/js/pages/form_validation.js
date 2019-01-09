@@ -122,6 +122,9 @@ $(function() {
             repeat_password: {
                 equalTo: "#password"
             },
+            password_confirmation: {
+                equalTo: "#password"
+            },
             email: {
                 email: true
             },

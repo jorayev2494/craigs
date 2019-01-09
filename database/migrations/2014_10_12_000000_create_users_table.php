@@ -18,9 +18,13 @@ class CreateUsersTable extends Migration
             $table->string('uuid', 100);
             $table->string('avatar', 100)->nullable();
             $table->string('name');
-            $table->string('lastname');
+            $table->string('lastname')->nullable();
             $table->string('email')->unique();
+
             $table->string('phone', 50)->nullable();
+            $table->string('phone_verify', 100)->nullable()->after("phone");
+            $table->integer('phone_code')->unsigned()->nullable()->after("phone_verify");
+
             $table->string('sex', 10)->nullable();
             $table->string('password');
 

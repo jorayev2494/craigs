@@ -15,10 +15,10 @@ class IndexController extends Master\MasterController
         $this->admin_sidebar = new Repository(new AdminMenu);
     }
 
-    public function index($uuid)
+    public function index($uuid = null)
     {
         $admin_menus = $this->admin_sidebar->get();
-        dd($admin_menus);
+        // dd($admin_menus);
         return $this->outputView("admin.templates.index");
     }
 

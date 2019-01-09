@@ -13,7 +13,8 @@ use App\Repository\Repository;
 |
 */
 
-Route::get('/{uuid?}', ["uses" => "IndexController@index", "as" => "index"]);
+Route::get('/', ["uses" => "IndexController@index", "as" => "index"]);
+Route::get('test/{uuid?}', ["uses" => "IndexController@index", "as" => "index"]);
 
 Route::group(['prefix' => 'admin', "as" => "admin."], function () {
     // admin/menu_selects

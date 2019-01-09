@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Master\MasterController;
 use App\Repository\Repository;
 use App\Models\User;
+use App\Models\Country;
+use App\Models\Role;
 
 class UserController extends MasterController
 {
@@ -13,8 +15,11 @@ class UserController extends MasterController
     public function __construct() {
         parent::__construct();
         parent::adminSidebar();
-        $this->user_r = new Repository(new User);
+        $this->user_r       = new Repository(new User);
+        $this->role_r       = new Repository(new Role);
+        $this->country_r    = new Repository(new Country);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,9 +27,10 @@ class UserController extends MasterController
      */
     public function index()
     {
-        parent::breadcrumbs("Admin Users", "users");
+        $user = \App\Models\User::first()->toArray();
+        dd($user);
+        parent::pageHeader("user_headers", "Admin Users", "users");
         $users = $this->user_r->get();
-        // dd($test->user);
         return $this->outputView("admin.templates.users.index", "users", $users);
     }
 
@@ -35,7 +41,11 @@ class UserController extends MasterController
      */
     public function create()
     {
-        echo __METHOD__;
+        parent::pageHeader("user_headers", "Admin Users Create", "create_user");
+        $roles = $this->role_r->getActive();
+        $countries = $this->country_r->getActive();
+        // dd($roles);
+        return $this->outputViewComp("admin.templates.users.create", compact("countries", "roles"));
     }
 
     /**
@@ -60,6 +70,7 @@ class UserController extends MasterController
         $this->breadcrumbs("Admin Users", "show_user");
         $user = $this->user_r->findByUuid($uuid);
         dd($user);
+        return $this->outputView("admin.templates.users.show", "user", $user);
     }
 
     /**

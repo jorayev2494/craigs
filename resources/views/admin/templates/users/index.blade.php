@@ -20,6 +20,13 @@
                 The HTML5 export buttons plug-in for Buttons provides four export buttons: <code>copyHtml5</code> - copy to clipboard; <code>csvHtml5</code> - save to CSV file; <code>excelHtml5</code> - save to XLSX file (requires JSZip); <code>pdfHtml5</code> - save to PDF file (requires PDFMake). This example demonstrates these four button types with their default options. Please note that these button types may also a Flash fallback for older browsers (IE9-).
             </div>
 
+            <div class="panel-heading pull-right">
+                <a href="{{ route('admin.users.create') }}" class="btn btn-info btn-labeled">
+                    <b><i class="icon-plus2 position-left"></i></b>
+                    @lang("lang.create")
+                </a>
+            </div>
+
             <table class="table datatable-button-html5-basic">
                 <thead>
                     <tr>

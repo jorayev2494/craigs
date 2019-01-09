@@ -23,10 +23,16 @@
             $trail->push(trans("lang.selectees_sidebar"), route('admin.menu_selectees.index'));
         });
 
-        // Admin Sidebar Select
+        // Admin Users
         Breadcrumbs::for('Admin Users', function ($trail) {
             $trail->parent('Admin Dashboard');
             $trail->push(trans("lang.users"), route('admin.users.index'));
+        });
+
+        // Admin Users Create
+        Breadcrumbs::for('Admin Users Create', function ($trail) {
+            $trail->parent('Admin Users');
+            $trail->push(trans("lang.create_user"), route('admin.users.create'));
         });
     #endregion
 

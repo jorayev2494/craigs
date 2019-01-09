@@ -15,7 +15,9 @@ class MasterController extends Controller
 {
 
     // Данные сайта
-    protected $user_r;                          // Репозитории пользователей
+    protected $user_r;              // Репозитории Пользователей
+    protected $role_r;              // Репозитории Ролей
+    protected $country_r;           // Репозитории Стран
 
 
     // Данные Сайдбар Администратора
@@ -60,6 +62,26 @@ class MasterController extends Controller
     }
 
     /**
+     * Показать Интерфейс Запаковкой с Compact
+     *
+     * @param [type] $view
+     * @param boolean $dataName
+     * @param boolean $data
+     * @return void
+     */
+    public function outputViewComp($view, array $compact = [])
+    {
+        if (is_array($compact) && count($compact)) {
+            foreach ($compact as $name => $value) {
+                $this->vars = Arr::add($this->vars, $name, $value);
+            }
+        }
+
+        // dd($this->vars);
+        return View::make($view)->with($this->vars);
+    }
+
+    /**
      * Передать данный в Интерфейс формате RESTful API
      *
      * @param [type] $view
@@ -101,6 +123,23 @@ class MasterController extends Controller
         // Проверка Титульный текст сайта
         $this->title = $title ? Lang::get("lang." . $title) : abort(404);
         $this->vars = Arr::add($this->vars, "title", $this->title);
+    }
+
+    /**
+     * Подготовка header страница
+     *
+     * @param string $view
+     * @param string $breadName
+     * @param string $title
+     * @return void
+     */
+    protected function pageHeader(string $view = null, string $breadName = null, string $title = null)
+    {
+        $this->breadcrumbs($breadName, $title);
+        // Проверка не пустой ли $view и получение вида
+        $headerPage = $view ? $this->outputView("admin.includes.page_headers." . $view)->render() : abort(404);
+        $this->vars = Arr::add($this->vars, "page_header", $headerPage);
+
     }
 
     /**
